@@ -8,7 +8,7 @@
     "rules": {
         "quotemark": [true, "single", "avoid-escape"],
         "align": [true, "parameters"],
-        "max-classes-per-file": [false],
+        "max-classes-per-file": false,
         "object-literal-sort-keys": false,
         "curly": false,
         "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore"],
