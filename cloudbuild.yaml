@@ -1,3 +1,4 @@
+# Google Cloud Build script
 steps:
 - name: 'gcr.io/cloud-builders/yarn'
   args: ['install']
