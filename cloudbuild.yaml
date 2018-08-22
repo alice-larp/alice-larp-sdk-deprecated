@@ -1,10 +1,26 @@
 # Google Cloud Build script
 steps:
+# Run tests first
 - name: 'gcr.io/cloud-builders/yarn'
   args: ['install']
 - name: 'gcr.io/cloud-builders/yarn'
   args: ['bootstrap']
 - name: 'gcr.io/cloud-builders/yarn'
-  args: ['build']
-- name: 'gcr.io/cloud-builders/yarn'
   args: ['test']
+# Build container images afterwards
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build', '-f', 'packages/alice-api-server/Dockerfile', '-t', 'gcr.io/$PROJECT_ID/alice-api-server', '.' ]
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build', '-f', 'packages/alice-qr-lib/Dockerfile', '-t', 'gcr.io/$PROJECT_ID/alice-qr-lib', '.' ]
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build', '-f', 'packages/magellan-models/Dockerfile', '-t', 'gcr.io/$PROJECT_ID/magellan-models', '.' ]
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build', '-f', 'packages/medicine-frontend/Dockerfile', '-t', 'gcr.io/$PROJECT_ID/medicine-frontend', '.' ]
+# Push container images
+images:
+- 'gcr.io/$PROJECT_ID/alice-api-server'
+- 'gcr.io/$PROJECT_ID/alice-qr-lib'
+- 'gcr.io/$PROJECT_ID/magellan-models'
+- 'gcr.io/$PROJECT_ID/medicine-frontend'
+
+
