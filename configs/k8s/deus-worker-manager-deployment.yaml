@@ -12,7 +12,7 @@ spec:
         component: deus-worker-manager
     spec:
       initContainers:
-      - image: alicelarp/magellan-models
+      - image: gcr.io/alice-larp/magellan-models
         imagePullPolicy: Always
         name: magellan-models
         command:

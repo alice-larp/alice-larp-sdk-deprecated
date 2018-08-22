@@ -7,7 +7,7 @@ spec:
     spec:
       restartPolicy: OnFailure
       initContainers:
-      - image: alicelarp/magellan-models
+      - image: gcr.io/alice-larp/magellan-models
         imagePullPolicy: Always
         name: magellan-models
         command:

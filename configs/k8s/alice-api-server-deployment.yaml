@@ -12,7 +12,7 @@ spec:
         component: alice-api-server
     spec:
       containers:
-      - image: alicelarp/alice-api-server
+      - image: gcr.io/alice-larp/alice-api-server
         imagePullPolicy: Always
         name: alice-api-server
         env:

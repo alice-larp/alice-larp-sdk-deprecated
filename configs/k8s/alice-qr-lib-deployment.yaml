@@ -12,7 +12,7 @@ spec:
         component: alice-qr-lib
     spec:
       containers:
-      - image: alicelarp/alice-qr-lib
+      - image: gcr.io/alice-larp/alice-qr-lib
         imagePullPolicy: Always
         name: alice-qr-lib
         ports:

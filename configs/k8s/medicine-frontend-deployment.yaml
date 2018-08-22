@@ -12,7 +12,7 @@ spec:
         component: medicine-frontend
     spec:
       containers:
-      - image: alicelarp/medicine-frontend
+      - image: gcr.io/alice-larp/medicine-frontend
         imagePullPolicy: Always
         name: medicine-frontend
         ports:
