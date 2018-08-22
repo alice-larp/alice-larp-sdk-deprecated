@@ -8,6 +8,16 @@ steps:
 - name: 'gcr.io/cloud-builders/yarn'
   args: ['test']
 # Build container images afterwards
+# Pull images for cache
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'pull', 'gcr.io/$PROJECT_ID/alice-api-server:latest']
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'pull', 'gcr.io/$PROJECT_ID/alice-qr-lib:latest']
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'pull', 'gcr.io/$PROJECT_ID/magellan-models:latest']
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'pull', 'gcr.io/$PROJECT_ID/medicine-frontend:latest']
+# Actual build steps using cache
 - name: 'gcr.io/cloud-builders/docker'
   args: [ 'build',
           '-f', 'packages/alice-api-server/Dockerfile',
