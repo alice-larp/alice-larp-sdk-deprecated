@@ -1,31 +1,31 @@
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
-  name: deus-qr-lib
+  name: alice-qr-lib
 spec:
   selector:
     matchLabels:
-      component: deus-qr-lib
+      component: alice-qr-lib
   template:
     metadata:
       labels:
-        component: deus-qr-lib
+        component: alice-qr-lib
     spec:
       containers:
-      - image: alexeyeremin/deus-qr-lib
+      - image: alicelarp/alice-qr-lib
         imagePullPolicy: Always
-        name: deus-qr-lib
+        name: alice-qr-lib
         ports:
-        - containerPort: 8159
+        - containerPort: 80
         readinessProbe:
           httpGet:
             path: /
-            port: 8159
+            port: 80
           initialDelaySeconds: 3
           periodSeconds: 20
         livenessProbe:
           httpGet:
             path: /
-            port: 8159
+            port: 80
           initialDelaySeconds: 3
           periodSeconds: 20

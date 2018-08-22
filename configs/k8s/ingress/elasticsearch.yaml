@@ -7,10 +7,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - elasticsearch.alice.magellan2018.ru
+    - elasticsearch.alice.aerem.in
     secretName: tls-secret
   rules:
-  - host: elasticsearch.alice.magellan2018.ru
+  - host: elasticsearch.alice.aerem.in
     http:
       paths:
       - path: /

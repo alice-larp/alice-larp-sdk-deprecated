@@ -1,20 +1,20 @@
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
-  name: deus-server
+  name: alice-api-server
 spec:
   selector:
     matchLabels:
-      component: deus-server
+      component: alice-api-server
   template:
     metadata:
       labels:
-        component: deus-server
+        component: alice-api-server
     spec:
       containers:
-      - image: alexeyeremin/deus-server
+      - image: alicelarp/alice-api-server
         imagePullPolicy: Always
-        name: deus-server
+        name: alice-api-server
         env:
         - name: COUCHDB_USER
           valueFrom:
@@ -36,12 +36,12 @@ spec:
         readinessProbe:
           httpGet:
             path: /time
-            port: 8157
+            port: 80
           initialDelaySeconds: 3
           periodSeconds: 20
         livenessProbe:
           httpGet:
             path: /time
-            port: 8157
+            port: 80
           initialDelaySeconds: 3
           periodSeconds: 20

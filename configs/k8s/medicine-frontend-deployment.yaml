@@ -12,7 +12,7 @@ spec:
         component: medicine-frontend
     spec:
       containers:
-      - image: alexeyeremin/medicine-frontend
+      - image: alicelarp/medicine-frontend
         imagePullPolicy: Always
         name: medicine-frontend
         ports:

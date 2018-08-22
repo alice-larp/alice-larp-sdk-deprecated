@@ -7,10 +7,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - couchdb.alice.magellan2018.ru
+    - couchdb.alice.aerem.in
     secretName: tls-secret
   rules:
-  - host: couchdb.alice.magellan2018.ru
+  - host: couchdb.alice.aerem.in
     http:
       paths:
       - path: /

@@ -1,19 +1,19 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: deus-qr-lib
+  name: alice-qr-lib
   annotations:
     kubernetes.io/ingress.allow-http: "false"
 spec:
   tls:
   - hosts:
-    - qr.alice.magellan2018.ru
+    - qr.alice.aerem.in
     secretName: tls-secret
   rules:
-  - host: qr.alice.magellan2018.ru
+  - host: qr.alice.aerem.in
     http:
       paths:
       - path: /
         backend:
-          serviceName: deus-qr-lib
+          serviceName: alice-qr-lib
           servicePort: 8159

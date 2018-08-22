@@ -7,10 +7,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - lab.alice.magellan2018.ru
+    - lab.alice.aerem.in
     secretName: tls-secret
   rules:
-  - host: lab.alice.magellan2018.ru
+  - host: lab.alice.aerem.in
     http:
       paths:
       - path: /

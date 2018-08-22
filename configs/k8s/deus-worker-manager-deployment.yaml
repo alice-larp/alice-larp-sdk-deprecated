@@ -12,9 +12,9 @@ spec:
         component: deus-worker-manager
     spec:
       initContainers:
-      - image: alexeyeremin/deus-models
+      - image: alicelarp/magellan-models
         imagePullPolicy: Always
-        name: deus-models
+        name: magellan-models
         command:
           - cp
           - -r

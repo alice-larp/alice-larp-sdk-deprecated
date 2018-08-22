@@ -8,10 +8,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - docker-registry.alice.magellan2018.ru
+    - docker-registry.alice.aerem.in
     secretName: tls-secret
   rules:
-  - host: docker-registry.alice.magellan2018.ru
+  - host: docker-registry.alice.aerem.in
     http:
       paths:
       - path: /

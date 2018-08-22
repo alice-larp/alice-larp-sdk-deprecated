@@ -1,19 +1,19 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: deus-server
+  name: alice-api-server
   annotations:
     kubernetes.io/ingress.allow-http: "false"
 spec:
   tls:
   - hosts:
-    - api.alice.magellan2018.ru
+    - api.alice.aerem.in
     secretName: tls-secret
   rules:
-  - host: api.alice.magellan2018.ru
+  - host: api.alice.aerem.in
     http:
       paths:
       - path: /
         backend:
-          serviceName: deus-server
+          serviceName: alice-api-server
           servicePort: 8157

@@ -7,10 +7,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - kibana.alice.magellan2018.ru
+    - kibana.alice.aerem.in
     secretName: tls-secret
   rules:
-  - host: kibana.alice.magellan2018.ru
+  - host: kibana.alice.aerem.in
     http:
       paths:
       - path: /
