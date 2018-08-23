@@ -18,42 +18,36 @@ spec:
   - host: api.alice.aerem.in
     http:
       paths:
-      - path: /
-        backend:
+      - backend:
           serviceName: alice-api-server
           servicePort: 8157
   - host: qr.alice.aerem.in
     http:
       paths:
-      - path: /
-        backend:
+      - backend:
           serviceName: alice-qr-lib
           servicePort: 8159
   - host: couchdb.alice.aerem.in
     http:
       paths:
-      - path: /
-        backend:
+      - backend:
           serviceName: couchdb
           servicePort: 5984
   - host: elasticsearch.alice.aerem.in
     http:
       paths:
-      - path: /
-        backend:
+      - backend:
           serviceName: elasticsearch
           servicePort: 9200
   - host: kibana.alice.aerem.in
     http:
       paths:
-      - path: /
-        backend:
+      - backend:
           serviceName: kibana
           servicePort: 5601
   - host: lab.alice.aerem.in
     http:
       paths:
-      - path: /
-        backend:
+      - backend:
           serviceName: medicine-frontend
           servicePort: 8000
