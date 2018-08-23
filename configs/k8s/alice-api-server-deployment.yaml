@@ -32,7 +32,7 @@ spec:
               name: common-secret
               key: push_serverkey
         ports:
-        - containerPort: 8157
+        - containerPort: 80
         readinessProbe:
           httpGet:
             path: /time
