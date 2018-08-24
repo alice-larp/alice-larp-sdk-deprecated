@@ -16,7 +16,7 @@ steps:
   args: [ 'pull', 'gcr.io/$PROJECT_ID/alice-api-server:latest']
   waitFor: ['-']
 - name: 'gcr.io/cloud-builders/docker'
-  waitFor: ['run_tests, pull_alice_api_server']
+  waitFor: ['run_tests', 'pull_alice_api_server']
   args: [ 'build',
           '-f', 'packages/alice-api-server/Dockerfile',
           '-t', 'gcr.io/$PROJECT_ID/alice-api-server',
@@ -28,7 +28,7 @@ steps:
   args: [ 'pull', 'gcr.io/$PROJECT_ID/alice-qr-lib:latest']
   waitFor: ['-']
 - name: 'gcr.io/cloud-builders/docker'
-  waitFor: ['run_tests, pull_alice_qr_lib']
+  waitFor: ['run_tests', 'pull_alice_qr_lib']
   args: [ 'build',
           '-f', 'packages/alice-qr-lib/Dockerfile',
           '-t', 'gcr.io/$PROJECT_ID/alice-qr-lib',
@@ -40,7 +40,7 @@ steps:
   args: [ 'pull', 'gcr.io/$PROJECT_ID/magellan-models:latest']
   waitFor: ['-']
 - name: 'gcr.io/cloud-builders/docker'
-  waitFor: ['run_tests, pull_magellan_models']
+  waitFor: ['run_tests', 'pull_magellan_models']
   args: [ 'build',
           '-f', 'packages/magellan-models/Dockerfile',
           '-t', 'gcr.io/$PROJECT_ID/magellan-models',
@@ -52,7 +52,7 @@ steps:
   args: [ 'pull', 'gcr.io/$PROJECT_ID/medicine-frontend:latest']
   waitFor: ['-']
 - name: 'gcr.io/cloud-builders/docker'
-  waitFor: ['run_tests, pull_medicine_frontend']
+  waitFor: ['run_tests', 'pull_medicine_frontend']
   args: [ 'build',
           '-f', 'packages/medicine-frontend/Dockerfile',
           '-t', 'gcr.io/$PROJECT_ID/medicine-frontend',
