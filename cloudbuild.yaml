@@ -1,3 +1,4 @@
+timeout: 1200s
 # Google Cloud Build script
 steps:
 # Run tests first
@@ -5,41 +6,59 @@ steps:
   args: ['install']
 - name: 'gcr.io/cloud-builders/yarn'
   args: ['bootstrap']
-- name: 'gcr.io/cloud-builders/yarn'
+- id: run_tests
+  name: 'gcr.io/cloud-builders/yarn'
   args: ['test']
 # Build container images afterwards
-- name: 'gcr.io/cloud-builders/docker'
+
+- id: pull_alice_api_server
+  name: 'gcr.io/cloud-builders/docker'
   args: [ 'pull', 'gcr.io/$PROJECT_ID/alice-api-server:latest']
+  waitFor: ['-']
 - name: 'gcr.io/cloud-builders/docker'
+  waitFor: ['run_tests, pull_alice_api_server']
   args: [ 'build',
           '-f', 'packages/alice-api-server/Dockerfile',
           '-t', 'gcr.io/$PROJECT_ID/alice-api-server',
           '--cache-from', 'gcr.io/$PROJECT_ID/alice-api-server:latest',
           '.' ]
-- name: 'gcr.io/cloud-builders/docker'
+
+- id: pull_alice_qr_lib
+  name: 'gcr.io/cloud-builders/docker'
   args: [ 'pull', 'gcr.io/$PROJECT_ID/alice-qr-lib:latest']
+  waitFor: ['-']
 - name: 'gcr.io/cloud-builders/docker'
+  waitFor: ['run_tests, pull_alice_qr_lib']
   args: [ 'build',
           '-f', 'packages/alice-qr-lib/Dockerfile',
           '-t', 'gcr.io/$PROJECT_ID/alice-qr-lib',
           '--cache-from', 'gcr.io/$PROJECT_ID/alice-qr-lib:latest',
           '.' ]
-- name: 'gcr.io/cloud-builders/docker'
+
+- id: pull_magellan_models
+  name: 'gcr.io/cloud-builders/docker'
   args: [ 'pull', 'gcr.io/$PROJECT_ID/magellan-models:latest']
+  waitFor: ['-']
 - name: 'gcr.io/cloud-builders/docker'
+  waitFor: ['run_tests, pull_magellan_models']
   args: [ 'build',
           '-f', 'packages/magellan-models/Dockerfile',
           '-t', 'gcr.io/$PROJECT_ID/magellan-models',
           '--cache-from', 'gcr.io/$PROJECT_ID/magellan-models:latest',
           '.' ]
-- name: 'gcr.io/cloud-builders/docker'
+
+- id: pull_medicine_frontend
+  name: 'gcr.io/cloud-builders/docker'
   args: [ 'pull', 'gcr.io/$PROJECT_ID/medicine-frontend:latest']
+  waitFor: ['-']
 - name: 'gcr.io/cloud-builders/docker'
+  waitFor: ['run_tests, pull_medicine_frontend']
   args: [ 'build',
           '-f', 'packages/medicine-frontend/Dockerfile',
           '-t', 'gcr.io/$PROJECT_ID/medicine-frontend',
           '--cache-from', 'gcr.io/$PROJECT_ID/medicine-frontend:latest',
           '.' ]
+
 # Push container images
 images:
 - 'gcr.io/$PROJECT_ID/alice-api-server'
