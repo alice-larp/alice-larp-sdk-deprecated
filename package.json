@@ -3,7 +3,7 @@
 	"scripts": {
 		"deps": "lerna run deps",
 		"build": "lerna run build",
-		"test": "lerna run test"
+		"test": "lerna run test --max-buffer=99999999"
 	},
 	"devDependencies": {
 		"lerna": "^3.1.4",
