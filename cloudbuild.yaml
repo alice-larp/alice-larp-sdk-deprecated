@@ -59,10 +59,24 @@ steps:
           '--cache-from', 'gcr.io/$PROJECT_ID/medicine-frontend:latest',
           '.' ]
 
+- id: pull_medicine_frontend
+  name: 'gcr.io/cloud-builders/docker'
+  args: [ 'version']
+  #args: [ 'pull', 'gcr.io/$PROJECT_ID/medicine-frontend:latest']
+  waitFor: ['-']
+- name: 'gcr.io/cloud-builders/docker'
+  waitFor: ['run_tests', 'pull_medicine_frontend']
+  args: [ 'build',
+          '-f', 'packages/medicine-frontend/Dockerfile',
+          '-t', 'gcr.io/$PROJECT_ID/medicine-frontend',
+  #        '--cache-from', 'gcr.io/$PROJECT_ID/medicine-frontend:latest',
+          '.' ]
+
 # Push container images
 images:
 - 'gcr.io/$PROJECT_ID/alice-api-server'
 - 'gcr.io/$PROJECT_ID/alice-qr-lib'
+- 'gcr.io/$PROJECT_ID/alice-worker-manager'
 - 'gcr.io/$PROJECT_ID/magellan-models'
 - 'gcr.io/$PROJECT_ID/medicine-frontend'
 
