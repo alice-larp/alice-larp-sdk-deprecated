@@ -1,7 +1,7 @@
 {
 	"license": "Apache-2.0",
 	"scripts": {
-		"bootstrap": "lerna bootstrap",
+		"deps": "lerna run deps",
 		"build": "lerna run build",
 		"test": "lerna run test"
 	},
