@@ -18,7 +18,7 @@ steps:
   args: ['install', '--cwd', 'packages/medicine-frontend']
 - id: run_tests
   name: 'gcr.io/cloud-builders/yarn'
-  args: ['version']
+  args: ['install']
 # Build container images afterwards
 - id: pull_alice_api_server
   name: 'gcr.io/cloud-builders/docker'
