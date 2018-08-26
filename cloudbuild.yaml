@@ -5,15 +5,7 @@ steps:
 - name: 'gcr.io/cloud-builders/yarn'
   args: ['install']
 - name: 'gcr.io/cloud-builders/yarn'
-  args: ['install', '--cwd', 'packages/alice-api-server']
-- name: 'gcr.io/cloud-builders/yarn'
-  args: ['install', '--cwd', 'packages/alice-model-engine']
-- name: 'gcr.io/cloud-builders/yarn'
-  args: ['install', '--cwd', 'packages/alice-qr-lib']
-- name: 'gcr.io/cloud-builders/yarn'
-  args: ['install', '--cwd', 'packages/magellan-models']
-- name: 'gcr.io/cloud-builders/yarn'
-  args: ['install', '--cwd', 'packages/medicine-frontend']
+  args: ['run', 'deps']
 - id: run_tests
   name: 'gcr.io/cloud-builders/yarn'
   args: ['test']
