@@ -1,15 +1,15 @@
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
-  name: deus-worker-manager
+  name: alice-worker-manager
 spec:
   selector:
     matchLabels:
-      component: deus-worker-manager
+      component: alice-worker-manager
   template:
     metadata:
       labels:
-        component: deus-worker-manager
+        component: alice-worker-manager
     spec:
       initContainers:
       - image: gcr.io/alice-larp/magellan-models
@@ -24,9 +24,9 @@ spec:
         - name: models-src
           mountPath: /app_destination
       containers:
-      - image: alexeyeremin/deus-worker-manager
+      - image: gcr.io/alice-larp/alice-worker-manager
         imagePullPolicy: Always
-        name: deus-worker-manager
+        name: alice-worker-manager
         env:
         - name: COUCHDB_USER
           valueFrom:
