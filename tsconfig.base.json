@@ -2,6 +2,7 @@
   "compilerOptions": {
       "baseUrl": "./packages",
       "module": "commonjs",
+      "lib": ["es2017", "dom"],
       "noImplicitAny": true,
       "strictNullChecks": true,
       "preserveConstEnums": true,
