@@ -3,6 +3,7 @@
       "baseUrl": "./packages",
       "module": "commonjs",
       "lib": ["es2017", "dom"],
+      "target": "ES6",
       "strict": true,
       "preserveConstEnums": true,
       "emitDecoratorMetadata": true,
