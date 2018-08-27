@@ -3,5 +3,6 @@
       "baseUrl": "./packages",
       "module": "commonjs",
       "noImplicitAny": true,
+      "strictNullChecks": true,
   }
 }
