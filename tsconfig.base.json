@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
-      "baseUrl": "./packages"
+      "baseUrl": "./packages",
+      "module": "commonjs",
   }
 }
