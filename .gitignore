@@ -59,3 +59,6 @@ typings/
 
 **/dist/*
 **/build/*
+packages/alice-mobile/platforms/
+packages/alice-mobile/plugins/
+packages/alice-mobile/www/
