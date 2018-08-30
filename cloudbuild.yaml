@@ -70,14 +70,14 @@ steps:
 
 - id: pull_alice_worker_manager
   name: 'gcr.io/cloud-builders/docker'
-  args: [ 'pull', 'gcr.io/$PROJECT_ID/medicine-frontend:latest']
+  args: [ 'pull', 'gcr.io/$PROJECT_ID/alice-worker-manager:latest']
   waitFor: ['-']
 - name: 'gcr.io/cloud-builders/docker'
   waitFor: ['run_tests', 'pull_alice_worker_manager']
   args: [ 'build',
           '-f', 'packages/alice-worker-manager/Dockerfile',
           '-t', 'gcr.io/$PROJECT_ID/alice-worker-manager',
-          '--cache-from', 'gcr.io/$PROJECT_ID/medicine-frontend:latest',
+          '--cache-from', 'gcr.io/$PROJECT_ID/alice-worker-manager:latest',
           '.' ]
 
 # Push container images
