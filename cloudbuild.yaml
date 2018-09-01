@@ -5,7 +5,8 @@ steps:
 - id: pull_alice_sdk
   name: 'gcr.io/cloud-builders/docker'
   args: [ 'pull', 'gcr.io/$PROJECT_ID/alice-sdk:latest']
-- name: 'gcr.io/cloud-builders/docker'
+- id: 'run_tests'
+  name: 'gcr.io/cloud-builders/docker'
   args: [ 'build',
           '-t', 'gcr.io/$PROJECT_ID/alice-sdk',
           '--cache-from', 'gcr.io/$PROJECT_ID/alice-sdk:latest',
