@@ -2,23 +2,14 @@ timeout: 1800s
 # Google Cloud Build script
 steps:
 # Run tests first
-- name: 'gcr.io/cloud-builders/yarn'
-  args: ['install']
-- name: 'gcr.io/cloud-builders/yarn'
-  args: ['install', '--cwd', 'packages/alice-api-server']
-- name: 'gcr.io/cloud-builders/yarn'
-  args: ['install', '--cwd', 'packages/alice-model-engine']
-- name: 'gcr.io/cloud-builders/yarn'
-  args: ['install', '--cwd', 'packages/alice-qr-lib']
-- name: 'gcr.io/cloud-builders/yarn'
-  args: ['install', '--cwd', 'packages/alice-worker-manager']
-- name: 'gcr.io/cloud-builders/yarn'
-  args: ['install', '--cwd', 'packages/magellan-models']
-- name: 'gcr.io/cloud-builders/yarn'
-  args: ['install', '--cwd', 'packages/medicine-frontend']
-- id: run_tests
-  name: 'gcr.io/cloud-builders/yarn'
-  args: ['test']
+- id: pull_alice_sdk
+  name: 'gcr.io/cloud-builders/docker'
+  args: [ 'pull', 'gcr.io/$PROJECT_ID/alice-sdk:latest']
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build',
+          '-t', 'gcr.io/$PROJECT_ID/alice-sdk',
+          '--cache-from', 'gcr.io/$PROJECT_ID/alice-sdk:latest',
+          '.' ]
 # Build container images afterwards
 - id: pull_alice_api_server
   name: 'gcr.io/cloud-builders/docker'
@@ -82,6 +73,7 @@ steps:
 
 # Push container images
 images:
+- 'gcr.io/$PROJECT_ID/alice-sdk'
 - 'gcr.io/$PROJECT_ID/alice-api-server'
 - 'gcr.io/$PROJECT_ID/alice-qr-lib'
 - 'gcr.io/$PROJECT_ID/alice-worker-manager'
