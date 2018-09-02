@@ -6,7 +6,9 @@
 		"test": "lerna run test --concurrency=1 --stream --ignore=alice-mobile"
 	},
 	"devDependencies": {
+		"@types/mocha": "^5.2.5",
 		"lerna": "^3.1.4",
+		"mocha": "^5.2.0",
 		"ts-node": "^7.0.1",
 		"tslint": "^5.11.0",
 		"tslint-consistent-codestyle": "^1.13.3",
