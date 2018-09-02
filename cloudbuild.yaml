@@ -59,7 +59,7 @@ steps:
           '-f', 'packages/medicine-frontend/Dockerfile',
           '-t', 'gcr.io/$PROJECT_ID/medicine-frontend-unminified',
           '--cache-from', 'gcr.io/$PROJECT_ID/medicine-frontend-unminified',
-          '--target', 'node'
+          '--target', 'node',
           '.' ]
 - name: 'gcr.io/cloud-builders/docker'
   waitFor: ['run_tests', 'build_medicine_frontend_unminified']
