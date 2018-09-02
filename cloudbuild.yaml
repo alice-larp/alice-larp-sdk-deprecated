@@ -4,72 +4,72 @@ steps:
 # Run tests first
 - id: pull_alice_sdk
   name: 'gcr.io/cloud-builders/docker'
-  args: [ 'pull', 'gcr.io/$PROJECT_ID/alice-sdk:latest']
+  args: [ 'pull', 'gcr.io/$PROJECT_ID/alice-sdk']
 - id: 'run_tests'
   name: 'gcr.io/cloud-builders/docker'
   args: [ 'build',
           '-t', 'gcr.io/$PROJECT_ID/alice-sdk',
-          '--cache-from', 'gcr.io/$PROJECT_ID/alice-sdk:latest',
+          '--cache-from', 'gcr.io/$PROJECT_ID/alice-sdk',
           '.' ]
 # Build container images afterwards
 - id: pull_alice_api_server
   name: 'gcr.io/cloud-builders/docker'
-  args: [ 'pull', 'gcr.io/$PROJECT_ID/alice-api-server:latest']
+  args: [ 'pull', 'gcr.io/$PROJECT_ID/alice-api-server']
   waitFor: ['-']
 - name: 'gcr.io/cloud-builders/docker'
   waitFor: ['run_tests', 'pull_alice_api_server']
   args: [ 'build',
           '-f', 'packages/alice-api-server/Dockerfile',
           '-t', 'gcr.io/$PROJECT_ID/alice-api-server',
-          '--cache-from', 'gcr.io/$PROJECT_ID/alice-api-server:latest',
+          '--cache-from', 'gcr.io/$PROJECT_ID/alice-api-server',
           '.' ]
 
 - id: pull_alice_qr_lib
   name: 'gcr.io/cloud-builders/docker'
-  args: [ 'pull', 'gcr.io/$PROJECT_ID/alice-qr-lib:latest']
+  args: [ 'pull', 'gcr.io/$PROJECT_ID/alice-qr-lib']
   waitFor: ['-']
 - name: 'gcr.io/cloud-builders/docker'
   waitFor: ['run_tests', 'pull_alice_qr_lib']
   args: [ 'build',
           '-f', 'packages/alice-qr-lib/Dockerfile',
           '-t', 'gcr.io/$PROJECT_ID/alice-qr-lib',
-          '--cache-from', 'gcr.io/$PROJECT_ID/alice-qr-lib:latest',
+          '--cache-from', 'gcr.io/$PROJECT_ID/alice-qr-lib',
           '.' ]
 
 - id: pull_magellan_models
   name: 'gcr.io/cloud-builders/docker'
-  args: [ 'pull', 'gcr.io/$PROJECT_ID/magellan-models:latest']
+  args: [ 'pull', 'gcr.io/$PROJECT_ID/magellan-models']
   waitFor: ['-']
 - name: 'gcr.io/cloud-builders/docker'
   waitFor: ['run_tests', 'pull_magellan_models']
   args: [ 'build',
           '-f', 'packages/magellan-models/Dockerfile',
           '-t', 'gcr.io/$PROJECT_ID/magellan-models',
-          '--cache-from', 'gcr.io/$PROJECT_ID/magellan-models:latest',
+          '--cache-from', 'gcr.io/$PROJECT_ID/magellan-models',
           '.' ]
 
 - id: pull_medicine_frontend
   name: 'gcr.io/cloud-builders/docker'
-  args: [ 'pull', 'gcr.io/$PROJECT_ID/medicine-frontend:latest']
+  args: [ 'pull', 'gcr.io/$PROJECT_ID/medicine-frontend']
   waitFor: ['-']
 - name: 'gcr.io/cloud-builders/docker'
   waitFor: ['run_tests', 'pull_medicine_frontend']
   args: [ 'build',
           '-f', 'packages/medicine-frontend/Dockerfile',
           '-t', 'gcr.io/$PROJECT_ID/medicine-frontend',
-          '--cache-from', 'gcr.io/$PROJECT_ID/medicine-frontend:latest',
+          '--cache-from', 'gcr.io/$PROJECT_ID/medicine-frontend',
           '.' ]
 
 - id: pull_alice_worker_manager
   name: 'gcr.io/cloud-builders/docker'
-  args: [ 'pull', 'gcr.io/$PROJECT_ID/alice-worker-manager:latest']
+  args: [ 'pull', 'gcr.io/$PROJECT_ID/alice-worker-manager']
   waitFor: ['-']
 - name: 'gcr.io/cloud-builders/docker'
   waitFor: ['run_tests', 'pull_alice_worker_manager']
   args: [ 'build',
           '-f', 'packages/alice-worker-manager/Dockerfile',
           '-t', 'gcr.io/$PROJECT_ID/alice-worker-manager',
-          '--cache-from', 'gcr.io/$PROJECT_ID/alice-worker-manager:latest',
+          '--cache-from', 'gcr.io/$PROJECT_ID/alice-worker-manager',
           '.' ]
 
 # Push container images
