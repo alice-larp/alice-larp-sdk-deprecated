@@ -66,6 +66,7 @@ steps:
   args: [ 'build',
           '-f', 'packages/medicine-frontend/Dockerfile',
           '-t', 'gcr.io/$PROJECT_ID/medicine-frontend',
+          '--cache-from', 'gcr.io/$PROJECT_ID/medicine-frontend-unminified',
           '.' ]
 
 - id: pull_alice_worker_manager
