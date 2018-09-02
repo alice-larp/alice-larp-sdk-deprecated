@@ -1,4 +1,4 @@
-timeout: 1800s
+timeout: 3600s
 # Google Cloud Build script
 steps:
 # Run tests first
