@@ -48,16 +48,24 @@ steps:
           '--cache-from', 'gcr.io/$PROJECT_ID/magellan-models',
           '.' ]
 
-- id: pull_medicine_frontend
+- id: pull_medicine_frontend_unminified
   name: 'gcr.io/cloud-builders/docker'
-  args: [ 'pull', 'gcr.io/$PROJECT_ID/medicine-frontend']
+  args: [ 'pull', 'gcr.io/$PROJECT_ID/medicine-frontend-unminified']
   waitFor: ['-']
+- id: build_medicine_frontend_unminified
+  name: 'gcr.io/cloud-builders/docker'
+  waitFor: ['run_tests', 'pull_medicine_frontend_unminified']
+  args: [ 'build',
+          '-f', 'packages/medicine-frontend/Dockerfile',
+          '-t', 'gcr.io/$PROJECT_ID/medicine-frontend-unminified',
+          '--cache-from', 'gcr.io/$PROJECT_ID/medicine-frontend-unminified',
+          '--target', 'node'
+          '.' ]
 - name: 'gcr.io/cloud-builders/docker'
-  waitFor: ['run_tests', 'pull_medicine_frontend']
+  waitFor: ['run_tests', 'build_medicine_frontend_unminified']
   args: [ 'build',
           '-f', 'packages/medicine-frontend/Dockerfile',
           '-t', 'gcr.io/$PROJECT_ID/medicine-frontend',
-          '--cache-from', 'gcr.io/$PROJECT_ID/medicine-frontend',
           '.' ]
 
 - id: pull_alice_worker_manager
@@ -79,6 +87,7 @@ images:
 - 'gcr.io/$PROJECT_ID/alice-qr-lib'
 - 'gcr.io/$PROJECT_ID/alice-worker-manager'
 - 'gcr.io/$PROJECT_ID/magellan-models'
+- 'gcr.io/$PROJECT_ID/medicine-frontend-unminified'
 - 'gcr.io/$PROJECT_ID/medicine-frontend'
 
 
