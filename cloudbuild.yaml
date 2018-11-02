@@ -81,14 +81,27 @@ steps:
           '--cache-from', 'gcr.io/$PROJECT_ID/alice-worker-manager',
           '.' ]
 
+- name: 'gcr.io/cloud-builders/docker'
+  waitFor: ['run_tests']
+  args: [ 'build',
+          '-f', 'packages/alice-mobile/Dockerfile',
+          '-t', 'gcr.io/$PROJECT_ID/alice-mobile',
+          # '--cache-from', 'gcr.io/$PROJECT_ID/mobile',
+          '.' ]
+  secretEnv: ['HOCKEY_APP_TOKEN']
+
 # Push container images
 images:
 - 'gcr.io/$PROJECT_ID/alice-sdk'
 - 'gcr.io/$PROJECT_ID/alice-api-server'
 - 'gcr.io/$PROJECT_ID/alice-qr-lib'
 - 'gcr.io/$PROJECT_ID/alice-worker-manager'
+- 'gcr.io/$PROJECT_ID/alice-mobile'
 - 'gcr.io/$PROJECT_ID/magellan-models'
 - 'gcr.io/$PROJECT_ID/medicine-frontend-unminified'
 - 'gcr.io/$PROJECT_ID/medicine-frontend'
 
-
+secrets:
+- kmsKeyName: projects/$PROJECT_ID/locations/global/keyRings/cloudbuild/cryptoKeys/cloudbuild
+  secretEnv:
+    HOCKEY_APP_TOKEN: CiQAN/6WvJgdZnXKIm/oLJ/LqFnqlnTx1x9lUdIbPnSmthAAIv4SSQBrgk0K0MYRJL7i+zx9D/T4xRewJ0hX9uK4RAmxoEFSz8r/S/ZGdf6i+so+XbWOjXcUi902y1vULvHfzJPfBpOP3shE2WKXSXI=
