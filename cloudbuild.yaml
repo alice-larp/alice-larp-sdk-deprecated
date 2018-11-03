@@ -81,12 +81,16 @@ steps:
           '--cache-from', 'gcr.io/$PROJECT_ID/alice-worker-manager',
           '.' ]
 
+- id: pull_alice_mobile
+  name: 'gcr.io/cloud-builders/docker'
+  args: [ 'pull', 'gcr.io/$PROJECT_ID/alice-mobile']
+  waitFor: ['-']
 - name: 'gcr.io/cloud-builders/docker'
-  waitFor: ['run_tests']
+  waitFor: ['run_tests', 'pull_alice_mobile']
   args: [ 'build',
           '-f', 'packages/alice-mobile/Dockerfile',
           '-t', 'gcr.io/$PROJECT_ID/alice-mobile',
-          # '--cache-from', 'gcr.io/$PROJECT_ID/mobile',
+          '--cache-from', 'gcr.io/$PROJECT_ID/mobile',
           '.' ]
   secretEnv: ['HOCKEY_APP_TOKEN']
 
