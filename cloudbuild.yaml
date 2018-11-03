@@ -88,6 +88,7 @@ steps:
 - name: 'gcr.io/cloud-builders/docker'
   waitFor: ['run_tests', 'pull_alice_mobile']
   args: [ 'build',
+          '-e HOCKEY_APP_TOKEN',
           '-f', 'packages/alice-mobile/Dockerfile',
           '-t', 'gcr.io/$PROJECT_ID/alice-mobile',
           '--cache-from', 'gcr.io/$PROJECT_ID/mobile',
