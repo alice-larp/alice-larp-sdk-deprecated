@@ -91,7 +91,7 @@ steps:
           '-e HOCKEY_APP_TOKEN',
           '-f', 'packages/alice-mobile/Dockerfile',
           '-t', 'gcr.io/$PROJECT_ID/alice-mobile',
-          '--cache-from', 'gcr.io/$PROJECT_ID/mobile',
+          '--cache-from', 'gcr.io/$PROJECT_ID/alice-mobile',
           '.' ]
   secretEnv: ['HOCKEY_APP_TOKEN']
 
